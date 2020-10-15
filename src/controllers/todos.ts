@@ -1,4 +1,5 @@
 import { RequestHandler } from "express";
+import { nextTick } from "process";
 
 import { Todo } from "../models/todo";
 
@@ -19,5 +20,23 @@ export const createTodo: RequestHandler = (req, res, next) => {
 export const getTodos: RequestHandler = (req, res, next) => {
   res.status(200).json({
     todos: TODOS,
+  });
+};
+
+export const updateTodo: RequestHandler<{ id: string }> = (req, res, next) => {
+  const id = req.params.id;
+  const newText = (req.body as { text: string }).text;
+
+  const todoIndex = TODOS.findIndex((todo) => todo.id === id);
+
+  if (todoIndex < 0) {
+    throw new Error("Todo not found!");
+  }
+
+  TODOS[todoIndex] = new Todo(TODOS[todoIndex].id, newText);
+
+  res.status(200).json({
+    message: "Todo updated",
+    updatedTodo: TODOS[todoIndex],
   });
 };
