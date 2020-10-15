@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 
-import todoRoutes from "./routes/todo";
+import todoRoutes from "./routes/todos";
 
 const app = express();
 
