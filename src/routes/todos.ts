@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { createTodo } from "../controllers/todos";
+import { createTodo, getTodos } from "../controllers/todos";
 
 const router = Router();
 
@@ -8,7 +8,7 @@ const router = Router();
 router.post("/", createTodo);
 
 // get all todos
-router.get("/");
+router.get("/", getTodos);
 
 // get single todo
 router.get("/:id");
