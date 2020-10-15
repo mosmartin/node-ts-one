@@ -1,9 +1,11 @@
 import { Router } from "express";
 
+import { createTodo } from "../controllers/todos";
+
 const router = Router();
 
 // create todo
-router.post("/");
+router.post("/", createTodo);
 
 // get all todos
 router.get("/");
